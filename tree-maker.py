@@ -91,6 +91,7 @@ def process():
     files = os.listdir(os.getcwd()+"/"+user)
     trees=[]
     for file in files:
+        print file
         page = open(user+"/"+file).read()
         trees.extend(levelsToTree(stripPage(page),0))
     overlayTree = reduce(combineTrees,trees)

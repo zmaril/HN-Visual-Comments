@@ -2,11 +2,11 @@
  Zack Maril
  */
 
-var w = $(document).width(),
+var w = 1000,
 h = 2000;
 
 var tree = d3.layout.tree()
-    .size([h, w - 160]);
+    .size([h, w-160]);
 
 var diagonal = d3.svg.diagonal()
     .projection(function(d,i) { return [d.y, d.x]; });
@@ -60,14 +60,17 @@ d3.json("mpg.json", function(json) {
 	    // 	.attr("dy", 3)
 	    // 	.attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
 	    // 	.text(function(d) { return d.names; });
-	    $("svg circle").tipsy({   gravity: 'n', 
+
+	    $("svg circle").tipsy({   gravity: 's', 
 				      html: true, 
+				      offset: 1,
 				      title: function() {
 					  var d = this.__data__;
 					  var text = 'Most frequent commenter: '+d.names;
-					  text += "<br /> Chance node occurs: "+((d.number)/totalComments*100)+"%";
-					  text += "<br /> "
+					  var percent = Math.round(((d.number)/totalComments*100)*1000)/1000;
+					  console.log(percent);
+					  text += "<br /> Chance node occurs: "+percent+"%";
+					  text += "<br /> ";
 					  return text;
-				      }				      
-				  });
+				      }});
 	});
