@@ -21,6 +21,8 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/tree.css">
+  <link rel="stylesheet" href="css/tipsy.css">
   
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
@@ -28,6 +30,7 @@
        Modernizr enables HTML5 elements & feature detects for optimal performance.
        Create your own custom Modernizr build: www.modernizr.com/download/ -->
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
+
 </head>
 
 <body>
@@ -38,7 +41,7 @@
 
   </header>
   <div role="main">
-
+    <div id="chart"></div>
   </div>
   <footer>
 
@@ -55,18 +58,9 @@
   <!-- scripts concatenated and minified via build script -->
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
-  <!-- end scripts -->
-
-
-  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
-       mathiasbynens.be/notes/async-analytics-snippet -->
-  <script>
-    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
-  </script>
-
-  
+  <script type="text/javascript" src="js/libs/d3.js"></script>
+  <script type="text/javascript" src="js/libs/d3.layout.js"></script>
+  <script src="js/libs/jquery.tipsy.js"></script>
+  <!-- end scripts -->  
 </body>
 </html>

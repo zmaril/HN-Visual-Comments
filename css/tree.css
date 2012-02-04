@@ -1,0 +1,19 @@
+.node circle {
+  fill: #fff;
+  stroke: black;
+  stroke-width: 1.5px;
+}
+
+.node {
+  font: 10px sans-serif;
+}
+
+svg {
+    background: #F60
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
