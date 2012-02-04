@@ -89,22 +89,28 @@ def averageTree(tree):
     tree['names']=mode(tree['names'])
     if tree['children']:
         map(averageTree,tree['children'])
-    
+
+users=["edw519","jacquesm","patio11","pg","tptacek"]
+
 def process():
-    user="pg"
-    files = os.listdir(os.getcwd()+"/"+user)
-    trees=[]
-    for file in files:
-        print file
-        page = open(user+"/"+file).read()
-        trees.extend(levelsToTree(stripPage(page),0))
-    overlayTree = reduce(combineTrees,trees)
-    averageTree(overlayTree)
-    return overlayTree
+    allTogether = {}
+    for user in users:
+        print user
+        files = os.listdir(os.getcwd()+"/rawpages/"+user)
+        trees=[]
+        for file in files:
+            print file
+            page = open("rawpages/"+user+"/"+file).read()
+            trees.extend(levelsToTree(stripPage(page),0))
+            onlySoMany= trees[0:100]
+            overlayTree = reduce(combineTrees,onlySoMany)
+            averageTree(overlayTree)
+        allTogether[user]=overlayTree
+    return allTogether
 
 m=process()
 
-temp = open("mpg.json","w")
+temp = open("users.json","w")
 temp.write(json.dumps(m))
 temp.close()
 print "Done"       
