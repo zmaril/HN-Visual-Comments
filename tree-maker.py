@@ -2,16 +2,16 @@ from HTMLParser import HTMLParser
 import re
 import copy
 import json
-
+# "<table border=0><tr>.+ height=1 width=(\d+)></td>.+<a href=\"user.id=(\w+).+ago  | <a href=\"(.+)\">link.+\n<span class=\"comment\"><font color=#[0-9a-zA-Z]+>(.+)</font></span>"
 def stripPage(page):
-    regExp = "<table border=0><tr>.+ height=1 width=([0-9]+)></td>.+<a href=\"user.id=([a-zA-Z]+).+ago  | <a href=\"(.+)\">link.+\n<span class=\"comment\"><font color=#[0-9a-zA-Z]+>(.+)</font></span>"
+    regExp = "<table border=0><tr>.+ height=1 width=(\d+)></td>.+<a href=\"user.id=(\w+).+ago  \| <a href=\"(.+)\">link.+\n<span class=\"comment\"><font color=#[0-9a-zA-Z]+>(.+)</font></span>"
     m = re.findall(regExp,page)
-    print m[0]
-    levels = map(lambda (strNum,name,link,comment): (int(strNum)/40,name,link,comment),m)
+    levels = map(lambda (strNum,name,link,comment): (int(strNum)/40,name,{'link': link, 'comment': comment, 'user': name}),m)
     return levels
 
 def levelToTree(level,base):
     node = {'names': [level[0][1]],
+            'comments': [level[0][2]],
             'children': levelsToTree(level[1:],base+1)}
     return node
 
@@ -38,9 +38,11 @@ def combineTrees(oldTreeA,oldTreeB):
         return treeA
     elif treeA['children'] == None:
         treeB['names'].extend(treeA['names'])
+        treeB['comments'].extend(treeA['comments'])
         return treeB
     elif treeB['children'] == None:
         treeA['names'].extend(treeB['names'])
+        treeA['comments'].extend(treeB['comments'])
         return treeA
     else:
         names = treeA['names']
@@ -60,9 +62,11 @@ def combineTrees(oldTreeA,oldTreeB):
     
         children = map( lambda i: combineTrees(childrenA[i],childrenB[i])
                         ,range(len(childrenA)))
-
+        newComments = treeA['comments']
+        newComments.extend(treeB['comments'])
         newTree = { 'names': names,
-                 'children': children}
+                    'children': children,
+                    'comments': newComments}
         return newTree
 
 def mode(list):
