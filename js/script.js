@@ -51,7 +51,6 @@ var displayTree = function(json){
 	.attr("transform", function(d,i) { 
 		  return "translate(" + d.y+ "," + d.x + ")"; });
 
-
     node.append("circle")
 	.attr("r",5)
 	.style("fill",function(d){
@@ -155,7 +154,7 @@ d3.json("users.json", function(usersJson) {
 			   html: true, 
 			   offset: 12,
 			   title: function() {
-			       return "This was made by crawling hacker news comment threads, processing the html with python, and then using the excellent d3 and tipsy libraries to display all of the information. Click me to go to the github page for this project.";
+			       return "This was made by crawling hacker news comment threads, processing the html with python, and then using the excellent d3 and tipsy libraries to display all of the information. Click to go to the github page for this project.";
 			   }});
 
 
@@ -166,7 +165,7 @@ d3.json("users.json", function(usersJson) {
 			   html: true, 
 			   offset: 12,
 			   title: function() {
-			       return "Made by Zack. Click me to go to his about page on his shitty blog.";
+			       return "Made by me, Zack. Click to go to my about page on my shitty blog.";
 			   }});
 
 

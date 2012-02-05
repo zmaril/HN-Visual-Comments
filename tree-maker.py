@@ -2,6 +2,7 @@ from HTMLParser import HTMLParser
 import re
 import copy
 import json
+import os
 
 def stripPage(page):
     regExp = "<table border=0><tr>.+ height=1 width=(\d+)></td>.+<a href=\"user.id=(\w+).+ago  \| <a href=\"(.+)\">link.+\n<span class=\"comment\"><font color=#[0-9a-zA-Z]+>(.+)</font></span>"
@@ -90,7 +91,7 @@ def averageTree(tree):
     if tree['children']:
         map(averageTree,tree['children'])
 
-users=["edw519","jacquesm","patio11","pg","tptacek"]
+users=["edw519","patio11","pg","tptacek","cwan"]
 
 def process():
     allTogether = {}
@@ -102,9 +103,9 @@ def process():
             print file
             page = open("rawpages/"+user+"/"+file).read()
             trees.extend(levelsToTree(stripPage(page),0))
-            onlySoMany= trees[0:100]
-            overlayTree = reduce(combineTrees,onlySoMany)
-            averageTree(overlayTree)
+        onlySoMany= trees[0:50]
+        overlayTree = reduce(combineTrees,onlySoMany)
+        averageTree(overlayTree)
         allTogether[user]=overlayTree
     return allTogether
 
