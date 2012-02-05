@@ -2,7 +2,7 @@ from HTMLParser import HTMLParser
 import re
 import copy
 import json
-# "<table border=0><tr>.+ height=1 width=(\d+)></td>.+<a href=\"user.id=(\w+).+ago  | <a href=\"(.+)\">link.+\n<span class=\"comment\"><font color=#[0-9a-zA-Z]+>(.+)</font></span>"
+
 def stripPage(page):
     regExp = "<table border=0><tr>.+ height=1 width=(\d+)></td>.+<a href=\"user.id=(\w+).+ago  \| <a href=\"(.+)\">link.+\n<span class=\"comment\"><font color=#[0-9a-zA-Z]+>(.+)</font></span>"
     m = re.findall(regExp,page)

@@ -1,14 +1,14 @@
 from HTMLParser import HTMLParser
 import urllib
 import time
-#
+
 #fogus
 #cwan
 #jrockway
 #swombat
 #ssclafani
 #raganwald
-user= "jacquesm"
+user= "cwan"
 links=["/threads?id="+user]
 newsyc= 'http://news.ycombinator.com'
 
@@ -23,9 +23,10 @@ class MyHTMLParser(HTMLParser):
 
 def run():
     last = ""
-    while len(links)<50 and last != links[-1]: 
+    while len(links)<30 and last != links[-1]: 
         last = links[-1]
-        time.sleep(10)
+        print len(links)
+        time.sleep(1)
         nextLink = newsyc+links[-1]
         response = urllib.urlopen(nextLink)
         print nextLink
